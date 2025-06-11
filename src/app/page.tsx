@@ -90,7 +90,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-        <Link href="/contact">Contact</Link>
+        <Link href="/characters">Characters</Link>
       </footer>
     </div>
   )
