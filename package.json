@@ -6,12 +6,17 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate": "ts-node --project script/tsconfig.script.json script/migrate.ts",
+    "db:seed": "ts-node --project script/tsconfig.script.json script/seed.ts"
   },
   "dependencies": {
+    "dotenv": "^16.5.0",
+    "mysql2": "^3.14.1",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "ts-node": "^10.9.2",
     "workshop-intro": "file:"
   },
   "devDependencies": {
