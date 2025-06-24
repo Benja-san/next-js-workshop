@@ -1,3 +1,4 @@
+import Link from "next/link"
 import DeleteCharacter from "../ui/DeleteCharacter"
 
 export default async function HarryPotter() {
@@ -16,6 +17,9 @@ export default async function HarryPotter() {
             <img src={protagonist.image} alt={protagonist.name} />
             <p>{protagonist.house}</p>
             <DeleteCharacter protagonistId={protagonist.id} />
+            <Link href={`/harry-potter/${protagonist.id}/editer-personnage`}>
+              Editer
+            </Link>
           </li>
         ))}
       </ul>

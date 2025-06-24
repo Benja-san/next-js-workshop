@@ -7,6 +7,11 @@ interface InsertResult {
   warningStatus?: number
 }
 
+interface UpdateResult {
+  affectedRows: number
+  warningStatus?: number
+}
+
 export async function GET() {
   try {
     const [rows] = await db.query(
@@ -63,6 +68,39 @@ export async function DELETE(req: Request) {
     console.error("Erreur MySQL (DELETE) :", error)
     return NextResponse.json(
       { error: "Error, please try again" },
+      { status: 500 }
+    )
+  }
+}
+
+export async function PUT(req: Request) {
+  try {
+    const updatedCharacter = await req.json()
+    const { id, name, image, house } = updatedCharacter
+    if (typeof id !== "number" || isNaN(id)) {
+      return NextResponse.json(
+        { error: "Informations invalides" },
+        { status: 400 }
+      )
+    }
+
+    const [result] = (await db.query(
+      "UPDATE protagonists SET name = ?, image = ?, house = ? WHERE id = ?",
+      [name.trim(), image.trim(), house.trim(), id]
+    )) as [UpdateResult, unknown]
+
+    if (result.affectedRows === 0) {
+      return NextResponse.json(
+        { error: "Personnage non trouvée" },
+        { status: 404 }
+      )
+    }
+
+    return NextResponse.json({ message: "Personnage Modifié !" })
+  } catch (error) {
+    console.error("Erreur MySQL (PATCH) :", error)
+    return NextResponse.json(
+      { error: "Une erreur est survenue, veuillez réessayer" },
       { status: 500 }
     )
   }
