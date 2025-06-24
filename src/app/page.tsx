@@ -90,7 +90,8 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-        <Link href="/characters">Characters</Link>
+        <Link href="/characters">Rick And Morty Characters</Link>
+        <Link href="/harry-potter">Harry Potter Characters</Link>
       </footer>
     </div>
   )
